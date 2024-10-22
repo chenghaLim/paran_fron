@@ -1,0 +1,72 @@
+.messageContainer{
+  background: #BCF0DA;
+  min-width: 94vh;
+  overflow-y: auto;
+  max-height: 400px;
+  min-height: 100dvh;
+  margin-bottom: 2.25rem;
+  padding:5rem;
+}
+.systemMessageContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.systemMessage {
+  background-color: #55667758;
+  border-radius: 100px;
+  text-align: center;
+  color: white;
+  padding: 2px 15px;
+  font-size: 14px;
+}
+.myMessageContainer {
+  display: flex;
+  justify-content: flex-end;
+  align-items: end;
+  margin-bottom: 0.938rem;
+}
+.myMessage {
+  background-color: #f7e600;
+  border-radius: 8px;
+  padding: 8px;
+  max-width: 200px;
+  font-size: 18px;
+}
+
+.yourMessageContainer {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 1.5rem;
+  align-items: center;
+}
+.yourMessage {
+  background-color: white;
+  border-radius: 8px;
+  padding: 8px;
+  max-width: 200px;
+  font-size: 18px;
+}
+.yourChecked{
+ font-size: 14px;
+ padding: 10px 10px 0; 
+
+}
+.myChecked{
+ font-size: 14px;
+ padding: 10px 10px 0; 
+}
+
+.profileImage {
+  width: 38px;
+  height: 38px;
+  border-radius: 100px;
+  margin-right: 10px;
+}
+
+.messageTime {
+  font-size: 0.8rem;
+  color: gray;
+  margin-left: 10px;
+}

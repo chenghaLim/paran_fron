@@ -1,0 +1,39 @@
+/* 모달의 가시성 제어 및 애니메이션 */
+.visible {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.invisible {
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+/* 온라인 상태 표시 기본 스타일 */
+.onlineStatus {
+  position: absolute;
+  left: 2.25rem; /* 조금 더 오른쪽으로 조정 */
+  top: 0.25rem; /* 상단과 약간의 간격 */
+  height: 0.875rem; /* h-3.5 */
+  width: 0.875rem; /* w-3.5 */
+  border-radius: 9999px; /* 완전히 둥근 모양 */
+  border: 2px solid white;
+}
+
+/* 온라인과 오프라인 색상 */
+.online {
+  background-color: #4ade80; /* Tailwind green-400 */
+  composes: onlineStatus;
+}
+
+.offline {
+  background-color: #f87171; /* Tailwind red-400 */
+  composes: onlineStatus;
+}
+
+/* 다크 모드 지원 */
+:global(.dark) .onlineStatus {
+  border-color: #1f2937; /* dark:border-gray-800 */
+}

@@ -1,0 +1,36 @@
+.listUp {
+  position: absolute;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 10px;
+  width: 100%;
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 30;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.ListUp > * + * {
+  margin-top: 0.5rem;}
+
+.visible {
+  visibility: visible;
+  opacity: 100;
+}
+
+.invisible {
+  visibility: hidden;
+  opacity: 0;
+}
+
+.ListOne {
+  margin: 8px 0;
+}
+
+.number {
+  float: right;
+  color: red;
+}

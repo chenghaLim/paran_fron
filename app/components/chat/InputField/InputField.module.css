@@ -1,0 +1,38 @@
+.inputArea {
+  min-height: 50px;
+  display: flex;
+  position: absolute;
+  bottom: 38px;
+  width: 80%;
+}
+
+.inputContainer {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.MuiInputRoot {
+  height: 100%;
+  width: 100%;
+  border: none;
+  border-color: white;
+}
+
+.sendButton {
+  min-width: 10%;
+  border-radius: 0;
+  background-color: #ffcc00;
+  color: aliceblue;
+  padding-left: 3.125rem;
+  border: none;
+  width: auto;
+  opacity: 1;
+}
+.sendButton:hover {
+  cursor: pointer;
+}
+
+.sendButton:active {
+  background-color: #dfb300;
+}
