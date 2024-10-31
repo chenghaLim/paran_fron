@@ -21,7 +21,7 @@ export default function Details() {
         <div className="w-[45rem] mx-auto my-10">
             <div className="h-auto mx-auto w-1/2 justify-center content-center items-center bg-green-200 relative mb-8">
                     <Image
-                        src={file === null ? `http://localhost:8000/api/files/${book.id}?type=${FileType.BOOK}` : `http://localhost:8000/api/files?path=${file.path}`}
+                        src={file === null ? `http://api.paranmanzang.com/api/files/${book.id}?type=${FileType.BOOK}` : `http://api.paranmanzang.com/api/files?path=${file.path}`}
                         alt={book.title}
                         layout="responsive"
                         width={300}
