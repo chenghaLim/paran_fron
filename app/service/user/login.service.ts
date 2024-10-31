@@ -88,7 +88,7 @@ const getCookieValue = (name: string): string | null => {
   if (parts.length === 2) return parts.pop()?.split(';').shift() || null;
   return null;
 };
-const handleOAuthCallback = async (dispatch: AppDispatch): Promise<any> => {
+const handleOAuthCallback =  (dispatch: AppDispatch): void => {
   const nickname = getCookieValue("nickname");
   const token = getCookieValue("Authorization");
 
@@ -99,7 +99,7 @@ const handleOAuthCallback = async (dispatch: AppDispatch): Promise<any> => {
     throw new Error('액세스 토큰이나 닉네임이 없습니다.');
   }
 
-  await getToken(token, nickname, dispatch);
+  getToken(token, nickname, dispatch);
 };
 
 const getToken = async (token: string, nickname: string, dispatch: AppDispatch) => {
