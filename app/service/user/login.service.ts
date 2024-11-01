@@ -78,17 +78,9 @@ const oauth = async (): Promise<any> => {
 
   // 첫 번째 단계: OAuth URL로 리디렉션
   console.log("Redirecting to OAuth URL:", oauthUrl);
-  window.location.href = oauthUrl;
+  window.location.replace(oauthUrl);
   console.log("loginservice 부분", window.location.href)
 };
-
-const getCookieValue = (name: string): string | null => {
-  const value = `; ${document.cookie}`;
-  const parts = value.split(`; ${name}=`);
-  if (parts.length === 2) return parts.pop()?.split(';').shift() || null;
-  return null;
-};
-
 
 const handleOAuthCallback = (dispatch: AppDispatch): void => {
   // 쿠키에서 'Authorization'과 'nickname' 값을 가져옵니다.

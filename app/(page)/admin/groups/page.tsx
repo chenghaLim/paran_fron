@@ -32,6 +32,7 @@ export default function GroupsAdmin() {
   const groups = useSelector(getGroups)
   // 승인되지 않은 소모임 내역
   const enableGroups = useSelector(getEnableGroups)
+  console.log(enableGroups)
   const loading = useSelector(getIsLoading)
   const error = useSelector(getError)
 

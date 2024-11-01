@@ -8,6 +8,7 @@ import { groupService } from "@/app/service/group/group.service";
 import { getCurrentUser, getNickname } from "@/lib/features/users/user.slice";
 import { useSelector } from "react-redux";
 import { GroupModel } from "@/app/model/group/group.model";
+import { chatRoomService } from "@/app/service/chat/chatRoom.service";
 
 export default function GroupAdd() {
     const route = useRouter();
