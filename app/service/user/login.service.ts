@@ -9,7 +9,7 @@ import { groupService } from "../group/group.service";
 import { likeBookService } from "../group/likeBook.service";
 import { likePostService } from "../group/likePost.service";
 import { roomService } from "../room/room.service";
-import { useSelector } from "react-redux";
+import Cookies from 'js-cookie';
 
 const login = async (username: string, password: string, dispatch: AppDispatch): Promise<any> => {
   try {
@@ -45,7 +45,7 @@ const login = async (username: string, password: string, dispatch: AppDispatch):
     } else {
       console.error('Error:', error.message);
       throw new Error('비밀번호가 다릅니다 발생');
-      
+
     }
   }
 };
@@ -88,19 +88,30 @@ const getCookieValue = (name: string): string | null => {
   if (parts.length === 2) return parts.pop()?.split(';').shift() || null;
   return null;
 };
-const handleOAuthCallback =  (dispatch: AppDispatch): void => {
-  const nickname = getCookieValue("nickname");
-  const token = getCookieValue("Authorization");
 
-  console.log('닉네임:', nickname);
-  console.log('토큰:', token);
 
-  if (!token || !nickname) {
+const handleOAuthCallback = (dispatch: AppDispatch): void => {
+  // 쿠키에서 'Authorization'과 'nickname' 값을 가져옵니다.
+  const authToken = Cookies.get('Authorization');
+  const nickname = Cookies.get('nickname');
+
+  console.log('🔍 handleOAuthCallback 함수 시작');
+  console.log('👉 쿠키에서 가져온 닉네임:', nickname);
+  console.log('👉 쿠키에서 가져온 토큰:', authToken);
+
+  // 토큰이나 닉네임이 없으면 에러를 발생시킵니다.
+  if (!authToken || !nickname) {
+    console.error('🚨 에러 발생: 액세스 토큰이나 닉네임이 없습니다.');
     throw new Error('액세스 토큰이나 닉네임이 없습니다.');
   }
 
-  getToken(token, nickname, dispatch);
+  // 토큰과 닉네임이 정상적으로 존재하면 getToken 호출
+  console.log('✅ 모든 값이 정상적으로 수신되었습니다. getToken 함수를 호출합니다.');
+  getToken(authToken, nickname, dispatch);
+  
+  console.log('🔍 handleOAuthCallback 함수 종료');
 };
+
 
 const getToken = async (token: string, nickname: string, dispatch: AppDispatch) => {
   setAccessToken(token);
