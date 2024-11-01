@@ -70,7 +70,7 @@ export default function GroupsAdmin() {
             )}
           </ul>
         );
-      case "승인 대기 소모임":
+      case "승인 대기":
         return (
           <ul>
             {enableGroups.length > 0 ? (
