@@ -1,7 +1,7 @@
 // components/DetailButton.tsx
 "use client"
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import BookingModal from "../BookingModal";
 import Alert from "../Alert";
 import { useSelector } from "react-redux";
@@ -39,6 +39,7 @@ export default function DetailButton({ thisPage, displayReview, displayBoard, di
 
     const route = useRouter()
     const dispatch = useAppDispatch()
+
     const book = useSelector(getCurrentBook)
     const likebooks = useSelector(getLikedBooks)
     const likeRooms = useSelector(getLikedRooms)
@@ -51,9 +52,27 @@ export default function DetailButton({ thisPage, displayReview, displayBoard, di
     const users = useSelector(getGroupMembers)
     const nickname = useSelector(getNickname)
     const userInfo = user?.role
-    const isUserInGroup = group?.id && users[group.id]?.some((user: any) => user.nickname === nickname);
     const enableUsers = useSelector(getGroupEnableMembers)
-    const isPendingGroup = group?.id && enableUsers[group.id]?.some((user) => user.nickname === nickname);
+
+    const [isLiked, setIsLiked] = useState(false)
+    const [isUserInGroup, setIsUserInGroup] = useState(false)
+    const [isPendingGroup, setIsPendingGroup] = useState(false)
+
+    useEffect(()=>{
+        setIsLiked(()=>{
+            switch(thisPage) {
+                case "/books": return likebooks.some((likeBook) => likeBook.id === book?.id);
+                case "/rooms": return likeRooms.some((likeRoom) => likeRoom.id === room?.id);
+                case "/groups/board/detail": return likePosts.some((likePost) => likePost.id === post?.id);
+                default: return false;
+            }
+        })
+
+        if(group){
+            setIsUserInGroup(!!(group.id && users[group.id]?.some((user: any) => user.nickname === nickname)));
+            setIsPendingGroup(!!(group.id && enableUsers[group.id]?.some((user: any) => user.nickname === nickname)));
+        }
+    }, [thisPage, likebooks, likeRooms, likePosts, group, users, enableUsers, nickname, book, room, post])
 
     const handleReview = () => {
         route.push(`${thisPage}/review`)
@@ -63,7 +82,7 @@ export default function DetailButton({ thisPage, displayReview, displayBoard, di
         setIsConfirmOpen(true);
     };
     const Message = () => {
-        setAlertMessage('이미 찜 상품에 있습니다.');
+        setAlertMessage('이미 좋아요 목록에 있습니다.');
         setIsAlertOpen(true);
     }
     const LikeThis = () => {
@@ -252,7 +271,7 @@ export default function DetailButton({ thisPage, displayReview, displayBoard, di
                         }
                         {nickname && thisPage === '/groups' && isUserInGroup && (
                             <>
-                                {group.nickname !== nickname &&
+                                {group?.nickname !== nickname &&
                                     <button
                                         type="button"
                                         onClick={leaveGroup}
@@ -262,7 +281,7 @@ export default function DetailButton({ thisPage, displayReview, displayBoard, di
                                         탈퇴하기
                                     </button>
                                 }
-                                {group.nickname === nickname &&
+                                {group?.nickname === nickname &&
                                     <button
                                         type="button"
                                         onClick={deleteGroup}
